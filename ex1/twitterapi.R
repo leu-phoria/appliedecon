@@ -11,3 +11,5 @@ head(dt)
 
 length(grep("study", dt$text, ignore.case=TRUE, value=TRUE))
 #ignore case --> ignore if upper or lower case
+
+head(dt)
