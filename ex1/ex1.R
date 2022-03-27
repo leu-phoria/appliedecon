@@ -63,3 +63,7 @@ coef(lm(y2~x2, data=df)) #linear regression model
 
 ponydata <- c(1,2,3,NA,5)
 sum(ponydata, na.rm=T) #remove NA= true
+
+##Lecture 2
+summary(df)
+head(df)
