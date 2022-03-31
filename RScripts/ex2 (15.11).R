@@ -41,3 +41,8 @@ ggplot(data=hotel_data, aes(x=price))+geom_density()
 max(hotel_data$price)
 sort(hotel_data$price, decreasing = T)[1:10] 
 
+#A violin plot is a compact display of a continuous distribution. 
+#It is a blend of geom_boxplot() and geom_density(): a violin plot is a mirrored density plot displayed in the same way as a boxplot.
+ggplot(data= hotel_data, aes(x= hotel_data$accommodation_type, y=hotel_data$price))+
+  geom_violin() + geom_jitter()
+#kernel also gets better with more information
