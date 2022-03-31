@@ -1,14 +1,14 @@
-# Überschrift
+# Applied Econometrics
 
-## Unterüberschrift 2
+## this repository only has studying and git-practising purpose
 
-### Bliblablub
+### header 3
 
-Applied Econometrics tut weh 
+Applied Econometrics can be stressful 
 
 ### Valentin sagt 
 
 > merge conflict nicht gut diese, deswegen erst git pull mashallah
 
-odifjlksjgfösgäsfl ok reicht jetzt
+and now resetting the text to normal
 
