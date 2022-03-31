@@ -46,3 +46,11 @@ sort(hotel_data$price, decreasing = T)[1:10]
 ggplot(data= hotel_data, aes(x= hotel_data$accommodation_type, y=hotel_data$price))+
   geom_violin() + geom_jitter()
 #kernel also gets better with more information
+
+#subsetting data for only hotels in Vienna
+(vienna_hotels <- hotel_data[hotel_data$accommodation_type=="Hotel",])
+
+corr(vienna_hotels[,c("price", "distance")]) #negative correlation between price and distance
+#regress price on distance
+reg1 <- lm(data= vienna_hotels, price ~distance)
+summary(reg1) 
