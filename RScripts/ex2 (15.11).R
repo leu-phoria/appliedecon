@@ -52,5 +52,16 @@ ggplot(data= hotel_data, aes(x= hotel_data$accommodation_type, y=hotel_data$pric
 
 corr(vienna_hotels[,c("price", "distance")]) #negative correlation between price and distance
 #regress price on distance
-reg1 <- lm(data= vienna_hotels, price ~distance)
+reg1 <- lm(data= vienna_hotels, price ~distance) #give non-robust standard erros
 summary(reg1) 
+
+library(sandwich) #for robust estimators
+
+vcov_price_distance <- vcovHC(reg1, type="HC0") #heterosc robust estimator vcovHC or vcovHAC produce different se
+vcov_price_distance
+sqrt(diag(vcov_price_distance)) #extract standard errorss
+
+#use HC stanard errors
+library(lmtest)
+coeftest(reg1, vcov.=vcov_price_distance) #z and t Wald test, check if robust estimators are still significant
+
