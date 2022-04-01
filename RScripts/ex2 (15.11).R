@@ -65,3 +65,16 @@ sqrt(diag(vcov_price_distance)) #extract standard errorss
 library(lmtest)
 coeftest(reg1, vcov.=vcov_price_distance) #z and t Wald test, check if robust estimators are still significant
 
+library(boot) 
+coefboot <- function(data, idx){ #index idx
+  coef(lm(price~distance, data=data[idx,])) #idx specifies set of observations
+}
+
+B <- boot(vienna_hotels, coefboot, R=1000) # we took 1000 bootstrap samples and calculated intecept+slope
+head(B)
+
+bootdata <- B$t[,2]
+bootdata <- as.data.frame(bootdata)
+
+ggplot(data= bootdata, aes(x=bootdata))+ #bootstrap distribution of slope coefficient
+  geom_histogram(binwidth = 0.5)+ theme_bw()
