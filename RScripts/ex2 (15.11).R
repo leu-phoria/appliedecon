@@ -78,3 +78,32 @@ bootdata <- as.data.frame(bootdata)
 
 ggplot(data= bootdata, aes(x=bootdata))+ #bootstrap distribution of slope coefficient
   geom_histogram(binwidth = 0.5)+ theme_bw()
+
+#chapter 2
+plot(vienna_hotels$distance, vienna_hotels$price)
+abline(a=coef(reg1)[1], b=coef(reg1)[2], lwd=3, col="red")
+
+logprice <- log(vienna_hotels$price)
+logdist <- log(vienna_hotels$distance)
+
+#log level
+reg2 <- lm(data=vienna_hotels, logprice~vienna_hotels$distance); summary(reg2)
+plot(vienna_hotels$distance, logprice)
+abline(a=coef(reg2)[1], b=coef(reg2)[2], lwd=3, col="red")
+
+#level log
+plot(logdist, vienna_hotels$price)
+abline(a=coef(reg3)[1], b=coef(reg3)[2], lwd=3, col="chocolate")
+##reg3 <- lm(vienna_hotels$price~logdist); summary(reg3) #not a good idea, 
+which(vienna_hotels$distance==0) #because obs 75 is 0 distance
+
+reg3 <- lm(vienna_hotels$price[-75]~logdist[-75]); summary(reg3) #eliminate -75 from set for regression
+
+#log log has best specification looking at r squared
+reg4 <- lm(logprice[-75]~logdist[-75]); summary(reg4)
+plot(logdist[-75],logprice[-75])
+abline(a=coef(reg4)[1], b=coef(reg4)[2], lwd=3, col="cadetblue")
+
+#adj reg1
+reg1_adj <- lm(data= vienna_hotels, price[-75] ~distance[-75]); summary(reg1_adj)
+
