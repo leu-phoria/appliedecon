@@ -51,13 +51,13 @@ matlines(age,pred5,lty=c(1,2,2), col=c("black","black","black"))
 #npregbw estimates a non-prametric regression line with good (optimal) bandwidth using a default bandwidth selection method.
 #npplot plots the results with asymptotic confidence bands around the estimated values
 
-#Local constant kernel regression (Nadaraya-Watson)
+#Local constant kernel regression (Nadaraya-Watson) (regtype="lc")
 
 npplot(npregbw(xdat=age, ydat=logwage,regtype="lc", bwmethog="cv.ls"), plot.errors.method="asymptotic", ylim=c(11,15.1),plot.errors.style="band")
 points(x=age,y=logwage, cex=.7, col="steelblue")
 abline(v=median(age), lty=3)
 
-#Local linear kernel regression -- summary: better bahvior at the boundary of the data.
+#Local linear kernel regression -- summary: better bahviour at the boundary of the data. (local linear "ll")
 
 npplot(npregbw(xdat=age, ydat=logwage,regtype="ll"), plot.errors.method="asymptotic", ylim=c(11,15.1),plot.errors.style="band")
 points(x=age,y=logwage, cex=.7, col="steelblue")
