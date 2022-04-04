@@ -1,8 +1,5 @@
 # Applied Econometrics
-
 ## this repository only has studying and git-practising purpose
-
-### Applied Econometrics can be stressful, but is fun overall
 
 ##ex1
 - R introduction
@@ -38,7 +35,6 @@
 
 
 ### Valentin sagt 
-
 > merge conflict nicht gut diese, deswegen erst git pull mashallah
 
 
