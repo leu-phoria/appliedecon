@@ -116,4 +116,5 @@ reg8 <- lm_robust(lnw ~ age + agesq + female + white,data = dt2, se_type = 'HC1'
 
 #Same regressions in population
 reg9 <- lm_robust(lnw ~ age + agesq + female + white,data = dt, se_type = 'HC1' ); summary(reg9) #white significant for whole population
+#+never married
 reg10 <- lm_robust(lnw ~ age+ agesq + female + white + nevermar, data =dt, se_type = 'HC1'); summary(reg10); summary(reg10)
