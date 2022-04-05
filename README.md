@@ -32,7 +32,9 @@
 ##mroz: Female labor force participation
 - LPM vs logit/probit models
 - marginal effects
-
+- prediction
+- goodness of fit: pseudo R2
+- sensitivity, specificity
 
 ### Valentin sagt 
 > merge conflict nicht gut diese, deswegen erst git pull mashallah
