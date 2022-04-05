@@ -36,6 +36,13 @@
 - goodness of fit: pseudo R2
 - sensitivity, specificity
 
+##elecequip: time series analysis part 1
+- time series decomposition
+- philipp perron test
+- autocorrelation, partial autocorrelation
+- AR, MA, ARMA, ARIMA
+- forecasting
+
 ### Valentin sagt 
 > merge conflict nicht gut diese, deswegen erst git pull mashallah
 
