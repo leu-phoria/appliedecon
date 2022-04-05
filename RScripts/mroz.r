@@ -50,3 +50,34 @@ summary(lpm)c
 
 ##Classification using threshold 0.5. If predicted probability is >= 0.5, then classify 1, if <, classify 0.
 #Proportion of correctly classified individuals.
+logit.fitted <- as.numeric(logit$fitted.values >= 0.5) #logit$fitted.values probability of working for every observation in sample
+correct.pred.logit <- as.numeric(logit.fitted == mroz$inlf) #correctly predicted obs
+mean(correct.pred.logit) #73,5% correctly predicted
+
+probit.fitted <- as.numeric(probit$fitted.values >= 0.5)
+correct.pred.probit <- as.numeric(probit.fitted == mroz$inlf)
+mean(correct.pred.probit) #73,4% correctly predicted
+
+#McFadden's pseudo-R2 for logit and probit 1 - loglikelihood(model) / loglikelihood(intercept_only)
+
+r2.logit <- 1 - logLik(logit) / logLik(glm(inlf ~ 1, data = mroz, family = binomial(link="logit"))); r2.logit
+r2.probit <- 1 - logLik(probit) / logLik(glm(inlf ~ 1, data = mroz, family = binomial(link="probit"))); r2.probit
+#probit performed a little bit better
+
+# Sensitivity, specificity.
+
+tn <- length(logit.fitted[mroz$inlf == 0]) - sum(logit.fitted[mroz$inlf == 0]) #all negatives minus false pos
+tp <- sum(logit.fitted[mroz$inlf == 1]) #predicted 1 and true 1
+fp <- sum(logit.fitted[mroz$inlf ==0]) #predicted 1, but actually 0
+fn <- length(logit.fitted[mroz$inlf == 1])-sum(logit.fitted[mroz$inlf == 1]) #all positives minus true pos
+#check if all obs are included
+tn+fn+tp+fp #753 obs
+dim(mroz) #753 obs, 22 cols
+
+(sensitivity_logit <- tp/(tp+fn))
+(specificity_logit <- tn/(tn+fp))
+
+#plot ROC for this specific estimation model
+1-specificity_logit
+plot(seq(from=0, to=1, by=0.01), seq(from=0, to=1, by=0.01))
+points(x=1-specificity_logit, y= sensitivity_logit, col="red")
