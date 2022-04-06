@@ -43,6 +43,11 @@
 - AR, MA, ARMA, ARIMA
 - forecasting
 
+##tsstationarity
+- spurious regression
+- stationarity testing: Elliott Rothenburg Test, KPSS
+- Granger causality
+
 ### Valentin sagt 
 > merge conflict nicht gut diese, deswegen erst git pull mashallah
 
