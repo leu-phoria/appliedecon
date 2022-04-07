@@ -43,10 +43,15 @@
 - AR, MA, ARMA, ARIMA
 - forecasting
 
-##tsstationarity
+##tsstationarity: time series part 2
 - spurious regression
 - stationarity testing: Elliott Rothenburg Test, KPSS
 - Granger causality
+
+##immunizationpanel - panel data
+- fixed effects
+- robust se
+- coef interpret
 
 ### Valentin sagt 
 > merge conflict nicht gut diese, deswegen erst git pull mashallah
