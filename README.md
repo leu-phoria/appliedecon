@@ -53,6 +53,12 @@
 - robust se
 - coef interpret
 
+##panel 2
+- fixed effects vs random effects
+- Hausman testing
+- first difference
+- GMM
+
 ### Valentin sagt 
 > merge conflict nicht gut diese, deswegen erst git pull mashallah
 
