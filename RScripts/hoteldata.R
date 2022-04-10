@@ -58,7 +58,7 @@ library(sandwich) #for robust estimators
 
 vcov_price_distance <- vcovHC(reg1, type="HC0") #heterosc robust estimator vcovHC or vcovHAC produce different se
 vcov_price_distance
-sqrt(diag(vcov_price_distance)) #extract standard errorss
+sqrt(diag(vcov_price_distance)) #extract standard errors
 
 #use HC standard errors
 library(lmtest)

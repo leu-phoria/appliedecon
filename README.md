@@ -13,7 +13,8 @@
 - hotel data example
 - descriptive statistics
 - ggplot
-- heterosc robust standard errors, bivariate linear regression
+- heterosc robust standard errors, bootstrapping
+- univariate linear regression
 - log log, log level, level log
 
 ##cps71
