@@ -22,7 +22,8 @@ paramlog <- lm(logwage ~ age+ l_age, x=TRUE, y=TRUE);summary(paramlog)
 plot(age, logwage, xlab="Age", ylab="Log wage", cex=.7, ylim=c(11,15.1)) #could be quadratic, but also cubic
 
 #Fitted curve with confidence intervals
-pred1 <- predict(param1, interval="confidence") 
+pred1 <- predict(param1, interval="confidence")
+pred1.1 <- predict(param1, interval="prediction")
 pred2 <- predict(param2, interval="confidence")
 pred3 <- predict(param3, interval="confidence")
 pred4 <- predict(param4, interval="confidence")
@@ -31,7 +32,8 @@ pred5 <- predict(param5, interval="confidence")
 # Plot regression lines with confidence intervals.
 
 plot(age, logwage, xlab="Age", ylab="Log wage", cex=.7, ylim=c(11,15.1))
-matlines(age,pred1,lty=c(1,2,2), col=c("black","black","black"))
+matlines(age,pred1,lty=c(1,2,2), col=c("black","black","black")) #confidence interval
+matlines(age,pred1.1,lty=c(3,4,4), col=c("red","blue","blue")) #prediction interval
 
 plot(age, logwage, xlab="Age", ylab="Log wage", cex=.7, ylim=c(11,15.1)) #quadratic
 matlines(age,pred2,lty=c(1,2,2), col=c("black","black","black"))
@@ -48,18 +50,18 @@ matlines(age,pred5,lty=c(1,2,2), col=c("black","black","black"))
 ##### 
 # Non-parametric regression
 
-#npregbw estimates a non-prametric regression line with good (optimal) bandwidth using a default bandwidth selection method.
+#npregbw estimates a non-parametric regression line with good (optimal) bandwidth using a default bandwidth selection method.
 #npplot plots the results with asymptotic confidence bands around the estimated values
 
 #Local constant kernel regression (Nadaraya-Watson) (regtype="lc")
-
-npplot(npregbw(xdat=age, ydat=logwage,regtype="lc", bwmethog="cv.ls"), plot.errors.method="asymptotic", ylim=c(11,15.1),plot.errors.style="band")
+#bwmethod specifies method to select bandwidths, cv.ls for least-squares cross validation
+#plot.errors.method to specify the method to calculate errors: none, bootstrap or asymptotic
+npplot(npregbw(xdat=age, ydat=logwage,regtype="lc", bwmethod="cv.ls"), plot.errors.method="asymptotic", ylim=c(11,15.1),plot.errors.style="band")
 points(x=age,y=logwage, cex=.7, col="steelblue")
 abline(v=median(age), lty=3)
 
-#Local linear kernel regression -- summary: better bahviour at the boundary of the data. (local linear "ll")
-
-npplot(npregbw(xdat=age, ydat=logwage,regtype="ll"), plot.errors.method="asymptotic", ylim=c(11,15.1),plot.errors.style="band")
+#Local linear kernel regression -- summary: better behaviour at the boundary of the data. (local linear "ll")
+npplot(npregbw(xdat=age, ydat=logwage,regtype="ll", bwmethod="cv.ls"), plot.errors.method="asymptotic", ylim=c(11,15.1),plot.errors.style="band", col = "coral")
 points(x=age,y=logwage, cex=.7, col="steelblue")
 
 detach(cps71)

@@ -18,8 +18,8 @@
 - log log, log level, level log
 
 ##cps71
-- multivariate linear regression models
-- first non parametric regressions (kernel density)
+- polynomials linear regression models with visualisation and confidence models
+- non parametric regressions and visualisation (local constant, local linear)
 
 ##morg2014emp
 - regressing on wage
