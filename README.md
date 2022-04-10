@@ -32,9 +32,10 @@
 ##mroz: Female labor force participation
 - LPM vs logit/probit models
 - marginal effects
-- prediction
+- prediction for a profile
 - goodness of fit: pseudo R2
 - sensitivity, specificity
+- ROC
 
 ##elecequip: time series analysis part 1
 - time series decomposition

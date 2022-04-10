@@ -23,13 +23,19 @@ logit <- glm(model, data = mroz, family = binomial(link="logit")); summary(logit
 #probit model
 probit <- glm(model, data = mroz, family = binomial(link="probit")); summary(probit)
 
+library(jtools)
+export_summs(lpm, logit, probit)
+
 # coef(probit)
 # coef(probit)*1.6 # probit*1.6 similar magnitudes as logit
 # coef(logit)
 
-logitmfx(model, data = mroz) #marginal effects of logit model
-#interpretation: 1 more year in education, provides on avg 5percent increase in probability of being employed
-probitmfx(model, data = mroz)#marginal effects of probit model
+logitmargins <- logitmfx(model, data = mroz) #marginal effects of logit model
+#interpretation: 1 more year in education, provides cp on avg 5percentage points increase in probability of being employed
+probitmargins <- probitmfx(model, data = mroz)#marginal effects of probit model
+
+#coeff overview
+export_summs(lpm, logitmargins, probitmargins)
 
 #create a profile: intercept, mean nwifeinc,17y educ, 10yrs exper, mean expersq, age 45, 0 kids under 6, 1 kid over 6
 profile <- c(1, 20, 17, 10, 100, 45, 0, 1)
@@ -46,7 +52,7 @@ dlogis(singleindex) * coef(logit)[3] #marginal effect of 1 more year education o
 pnorm(singleindex_p) #probability of participation in labour market
 dnorm(singleindex_p) * coef(probit)[3] #marginal effect of 1 more year education on probability of participation in labour market
 
-summary(lpm)c
+summary(lpm)
 
 ##Classification using threshold 0.5. If predicted probability is >= 0.5, then classify 1, if <, classify 0.
 #Proportion of correctly classified individuals.
