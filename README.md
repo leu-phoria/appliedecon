@@ -22,12 +22,11 @@
 - non parametric regressions and visualisation (local constant, local linear)
 
 ##morg2014emp
-- regressing on wage
 - kernel density regression
-- ggplot
 - creating dummy/binary variables
-- interactions
-- robust regression and predictions
+- prediction from regression
+- interactions and interpretation
+- heterosc. robust regressions and prediction
 - hypothesis testing/joint testing
 
 ##mroz: Female labor force participation

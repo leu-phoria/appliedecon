@@ -8,12 +8,13 @@ summary(morgdata) #overview of data
 morgdata[,sample := ifelse(occ2012==0735,1, ifelse(morgdata$occ2012>=1005 & morgdata$occ2012<=1240,2,0))]
 dt <- morgdata
 
-#create female dummy and variables: wages, log wages,agesq
+#create female dummy and variables: wages, log wages,agesq and add to dt as columns
 dt[,female:=as.numeric(sex==2)][ 
   ,w:=earnwke/uhours ][
     ,lnw:=log(w)][
       ,agesq:=age^2] 
 
+#create subsets of data
 # dt1 Market research analysts and marketing specialists 
 # dt2 Computer and Mathematical Occupations
 dt1 <- dt[sample == 1, ]
@@ -33,28 +34,31 @@ quickplot(x=age, y=lnw, data=dt2)
 quickplot(x=age, y=w, data=dt1)
 quickplot(x=age, y=lnw, data=dt1)
 
+#non-parametric regressions
 #local linear kernel density regression age and wage dt2
 npplot(npregbw(xdat = dt2$age, ydat = dt2$w, regtype ='ll'), plot.errors.method = 'asymptotic',  plot.errors.style = 'band')
 #local linear kernel density regression age and logwage dt2
 npplot(npregbw(xdat = dt2$age, ydat = dt2$lnw, regtype ='ll'), plot.errors.method = 'asymptotic',  plot.errors.style = 'band')
-points(x=dt2$age,y=dt2$lnw, cex=.7, col="steelblue")
+points(x=dt2$age,y=dt2$lnw, cex=.5, col="steelblue")
 
 #take a look at differences between female and male
 ggplot(data = dt2, aes(x= as.factor(sex), y = w)) + geom_boxplot() #there is a difference between men(=1) and women(=2), women have more outliers
 ggplot(data = dt2, aes(x= as.factor(sex), y = w)) + geom_violin() + geom_jitter() #there are way more male obs than female
 
 dim(dt2[sex == 1,]) #3438 male obs
+dim(dt2[female == 0,])
 dim(dt2[sex == 2,]) #1298 female obs
+dim(dt2[female == 1,])
 
 #do some regressions
-##wage and age
+##wage and age, agesq
 reg1 <- lm(w ~ age + agesq, data = dt2); summary(reg1) #linear regression
 reg1_hrob <- lm_robust(w ~ age + agesq, data = dt2, se_type = 'HC1'); summary(reg1_hrob) #heterosc robust coefficients
-##lnwage and age
+##lnwage and age, agesq
 reg2 <- lm_robust(lnw ~ age + agesq, data = dt2); summary(reg2) #lin reg with robust se
 pred2 <- predict(lm(lnw ~ age + agesq, data = dt2), interval = 'confidence'); summary(pred2) #predict doesn't work with lm_robust, so we use lm. Confidence interval is different to robust!
 plot(dt2$age, dt2$lnw, cex = .7)
-lines(dt2$age, pred2[,1], lty=4, col= "red")
+lines(dt2$age, pred2[,1], lty=4, col= "coral")
 ##lnwage and female + age
 reg3 <- lm_robust(lnw ~ female, data = dt2, se_type = 'HC1'); summary(reg3) #female earns 14 percent less than men cp
 reg3.1 <- lm_robust(lnw ~ age + agesq + female, data = dt2, se_type = 'HC1'); summary(reg3.1) #Rsq is higher than reg2
