@@ -52,13 +52,15 @@
 ##immunizationpanel - panel data
 - fixed effects
 - robust se
+- clustering
+- first diff regression 
 - coef interpret
 
 ##panel 2
 - fixed effects vs random effects
 - Hausman testing
-- first difference
-- GMM
+- first difference regression
+- dynamic panel: GMM
 
 ### Valentin sagt 
 > merge conflict nicht gut diese, deswegen erst git pull mashallah

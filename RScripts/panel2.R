@@ -16,7 +16,7 @@ summary(re)
 ##no intercept in fe, but re and fe estim nevertheless the same
 
 phtest(inv~ value + capital, data =Grunfeld)
-#p value 0.3119, cannot reject H0: random effects
+#p value 0.3119, cannot reject H0. random effects
 #with large datasets rather expected to reject H0
 
 #first difference

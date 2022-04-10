@@ -31,10 +31,12 @@ head(data_panel)
 head(data_balanced)
   
 #fixed effects
+
+#de-mean estimator
 fe_lm <- lm_robust(surv ~ imm + year,
                    data= data_balanced,
                    se_type = "stata",
-                   fixed_effects = ~ c, #fix countries as fixed
+                   fixed_effects = ~ c, #countries as fixed
                    clusters = c) #here we could also cluster on regional instead of national level for bigger cluster
 summary(fe_lm) #two way fixed effects, we are not sure if effects constant over time, created dummy var for each year
 #1998 left out because of perfect multicollinearity, it is the reference category
@@ -61,5 +63,4 @@ fd_lm <- lm_robust(d_surv~ 0+ d_imm,
                    se_type="stata",
                    clusters = c)
 summary(fd_lm)
-#if i increase immmunization by 10 pc (not compared to the avg!), then the survival rate will increase by 0.06pc - direct interpretation
-)
+#if i increase immmunization by 10 pc (not compared to the avg!), then the survival rate will increase by 0.06pc points. direct interpretation
