@@ -35,6 +35,7 @@ summary(ur.ers(x))
 #test statistic is greater than critical values -> can not reject H0 at 10/5/1 pct level
 
 #Null hypothesis: series stationary
+#Kwiatkowski PSS
 summary(ur.kpss(x))
 #test statistic is larger than all critical values -> reject H0, process is stationary
 
@@ -48,6 +49,7 @@ y <- as.ts(y)
 dy <- diff(y)
 
 #Test Granger causality in both directions.
+#grangertest(grangervariable, dep. var, order)
 #Null hypothesis: Granger non-causality.
 grangertest(x,y, order = 1) #specify order=1 because we created AR1 process
 #Model 1 including xt, model 2 without. 

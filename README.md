@@ -41,7 +41,7 @@
 - time series decomposition
 - philipp perron test
 - autocorrelation, partial autocorrelation
-- AR, MA, ARMA, ARIMA
+- AR, MA, ARMA, ARIMA 
 - forecasting
 
 ##tsstationarity: time series part 2

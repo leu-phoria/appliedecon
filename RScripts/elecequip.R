@@ -4,7 +4,7 @@ library(seasonal)
 data(elecequip)
 fit <- stl(elecequip, s.window=7) #seasonal decomposition of time series data
 
-autoplot(fit) + xlab("Year") # f(st, Tt, Rt) - Remainder data minus trend+seasonal, Remainder looks more stationary
+autoplot(fit) + xlab("Year") # f(st, Tt, Rt) - Remainder = data - trend - seasonal, Remainder looks stationary
 
 library(aTSA) #Philipps Peron test
 
@@ -13,8 +13,8 @@ pp.test(fit$time.series[,'remainder']) #p value is small, we can reject H0 and a
 #adf.test(fit$time.series[,'remainder'])
 
 tsy <- fit$time.series[,'remainder']
-acf(tsy) #autocorrelation function. today (left vertical) only correlated with the last three days, but not 
-pacf(tsy) #partial autocorr function - autocorrelation between today and eg. 2 days ago, partialling out yesterday
+acf(tsy) #autocorrelation function. today (left vertical) only correlated with the last three time periods, but not further 
+pacf(tsy) #partial autocorr function - autocorrelation between today and 2 time periods ago, partialling out yesterday
 autoplot(tsy) #looks stationary
 
 library(forecast) #for ARMA
