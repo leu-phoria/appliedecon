@@ -4,7 +4,6 @@ library(pacman)
 library(igraph)
 
 pacman::p_load(data.table, ggplot2, rstudioapi, DataExplorer, bit64, boot)
-data_repo <- paste0(getwd(),"/data")
 
 #read data
 # hotels_europe_price <- read.csv("hotels-europe_price.csv")
@@ -32,8 +31,8 @@ change_binwidth_histplot <- function(binwidth){
 }
 
 #can't see how much data is in there in simple boxplot, so add geom_jitter
-boxplot_accomtype <- ggplot(data= hotel_data, aes(x= hotel_data$accommodation_type, y=hotel_data$price))+
-  geom_boxplot()+geom_jitter()
+(boxplot_accomtype <- ggplot(data= hotel_data, aes(x= hotel_data$accommodation_type, y=hotel_data$price))+
+  geom_boxplot()+geom_jitter())
 
 #kernel density plot
 ggplot(data=hotel_data, aes(x=price))+geom_density()
@@ -61,7 +60,7 @@ vcov_price_distance <- vcovHC(reg1, type="HC0") #heterosc robust estimator vcovH
 vcov_price_distance
 sqrt(diag(vcov_price_distance)) #extract standard errorss
 
-#use HC stanard errors
+#use HC standard errors
 library(lmtest)
 coeftest(reg1, vcov.=vcov_price_distance) #z and t Wald test, check if robust estimators are still significant
 
@@ -70,7 +69,7 @@ coefboot <- function(data, idx){ #index idx
   coef(lm(price~distance, data=data[idx,])) #idx specifies set of observations
 }
 
-B <- boot(vienna_hotels, coefboot, R=1000) # we took 1000 bootstrap samples and calculated intecept+slope
+B <- boot(vienna_hotels, coefboot, R=1000) # we took 1000 bootstrap samples and calculated intercept+slope
 head(B)
 
 bootdata <- B$t[,2]
@@ -94,7 +93,7 @@ abline(a=coef(reg2)[1], b=coef(reg2)[2], lwd=3, col="red")
 #level log
 plot(logdist, vienna_hotels$price)
 abline(a=coef(reg3)[1], b=coef(reg3)[2], lwd=3, col="chocolate")
-##reg3 <- lm(vienna_hotels$price~logdist); summary(reg3) #not a good idea, 
+# reg3 <- lm(vienna_hotels$price~logdist); summary(reg3) #not a good idea,
 which(vienna_hotels$distance==0) #because obs 75 is 0 distance
 
 reg3 <- lm(vienna_hotels$price[-75]~logdist[-75]); summary(reg3) #eliminate -75 from set for regression
@@ -106,4 +105,5 @@ abline(a=coef(reg4)[1], b=coef(reg4)[2], lwd=3, col="cadetblue")
 
 #adj reg1
 reg1_adj <- lm(data= vienna_hotels, price[-75] ~distance[-75]); summary(reg1_adj)
-
+plot(vienna_hotels$distance[-75], vienna_hotels$price[-75])
+abline(a=coef(reg1_adj)[1], b=coef(reg1_adj)[2], lwd=3, col="steelblue")

@@ -9,7 +9,7 @@
 ##twitterapi
 - example on how to extract twitter data
 
-##ex2
+##hoteldata
 - hotel data example
 - descriptive statistics
 - ggplot
